@@ -1,9 +1,3 @@
-Com certeza\! Vou inserir o diagrama na seção de Arquitetura do seu `README.md`.
-
-Aqui está a versão final do seu **`README.md`** completo, com o diagrama incluído na seção **Arquitetura da Solução**.
-
------
-
 ## 🚀 Deploy de Aplicação Fullstack em Kubernetes
 
 ### 👥 Integrantes da Equipe
@@ -122,7 +116,7 @@ kubectl apply -f frontend/deployment.yaml
 # Aplica as regras de Ingress (roteamento / e /api)
 kubectl apply -f ingress/ingress.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-```
+kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80```
 
 -----
 
@@ -132,8 +126,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 
 O acesso deve ser feito através do IP do seu Ingress Controller (geralmente `localhost` na máquina local):
 
-  * **Aplicação Frontend:** `http://localhost/`
-  * **Backend API:** `http://localhost/api/messages`
+  * **Aplicação Frontend:** http://localhost:8080
+  * **Backend API:** `http://localhost/api:8080/messages`
 
 #### Comandos Úteis para Verificação
 
