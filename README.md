@@ -72,6 +72,53 @@ Verifique se os seus arquivos de deploy (`deployment.yaml`) apontam corretamente
 
 Execute estes passos no seu terminal **após iniciar seu cluster Kind** e instalar o **NGINX Ingress Controller**.
 
+Com certeza\!
+
+A mensagem de utilização é ideal para ser incluída no seu `README.md` ou nas suas instruções de *deploy*, informando aos usuários como recriar o ambiente com as configurações de rede permanente.
+
+Aqui está a mensagem de utilização formatada:
+
+-----
+
+## 🚀 Passo 1: Criação do Cluster Kind (Acesso Permanente)
+
+Antes de aplicar os arquivos YAML, é crucial criar o cluster com o mapeamento de portas necessário para que o **NGINX Ingress Controller** seja acessível via `localhost:80`.
+
+**Mensagem de Utilização:**
+
+```bash
+# 1. Certifique-se de que o arquivo 'kind-config.yaml' (com o mapeamento de portas 80/443)
+#    está no diretório.
+
+# 2. Execute o comando para criar o cluster:
+kind create cluster --config kind-config.yaml --name meu-cluster-k8s
+```
+
+### 💡 Próximas Etapas no Deploy
+
+Após a criação do cluster, não se esqueça de que o próximo passo é **instalar o Ingress Controller** e, em seguida, **aplicar os YAMLs do seu projeto**.
+
+1.  **Instalar NGINX Ingress Controller:**
+    ```bash
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+    ```
+2.  **Aplicar Arquivos do Projeto:** (Seguindo o seu `README.md` original)
+    ```bash
+    kubectl apply -f namespace.yaml
+    # ... demais recursos (Secrets, ConfigMaps, Deployments, Services)
+    kubectl apply -f ingress/ingress.yaml
+    ```
+
+Mensagem de Utilização:
+
+Bash
+
+# 1. Certifique-se de que o arquivo 'kind-config.yaml' (com o mapeamento de portas 80/443)
+#    está no diretório.
+
+# 2. Execute o comando para criar o cluster:
+kind create cluster --config kind-config.yaml --name meu-cluster-k8s
+
 #### 1\. Configurações e Banco de Dados (Database First)
 
 Aplique as configurações de isolamento e o deploy do banco de dados.
@@ -116,7 +163,7 @@ kubectl apply -f frontend/deployment.yaml
 # Aplica as regras de Ingress (roteamento / e /api)
 kubectl apply -f ingress/ingress.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80```
+``
 
 -----
 
@@ -126,8 +173,8 @@ kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 
 
 O acesso deve ser feito através do IP do seu Ingress Controller (geralmente `localhost` na máquina local):
 
-  * **Aplicação Frontend:** http://localhost:8080
-  * **Backend API:** `http://localhost/api:8080/messages`
+  * **Aplicação Frontend:** http://localhost
+  * **Backend API:** `http://localhost/api/messages`
 
 #### Comandos Úteis para Verificação
 
